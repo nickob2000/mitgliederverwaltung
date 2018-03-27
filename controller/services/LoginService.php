@@ -1,4 +1,5 @@
 <?php
+include "../../persistence/UserDao.php";
 
 /**
  * Created by PhpStorm.
@@ -8,5 +9,15 @@
  */
 class LoginService
 {
+    private $userDao;
 
+    function __construct()
+    {
+        $this->userDao = new UserDao();
+    }
+
+    function checkUserCredentials($username, $password){
+        return $this->userDao->selectAll();
+
+    }
 }

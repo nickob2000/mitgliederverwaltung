@@ -9,6 +9,24 @@
 class User extends Person
 {
     private $password;
+    private $permission;
+
+    /**
+     * @return mixed
+     */
+    public function getPermission()
+    {
+        return $this->permission;
+    }
+
+    /**
+     * @param mixed $permission
+     */
+    public function setPermission($permission)
+    {
+        $this->permission = $permission;
+    }
+
 
     /**
      * @return mixed
