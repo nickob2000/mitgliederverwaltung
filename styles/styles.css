@@ -94,13 +94,12 @@ transition: all 0.3 ease;*/
  text-decoration: none;
 }
 
-/*Login*/
-.login-page {
+.form-page {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;
 }
-
+/*Regsterform*/
 .form .register-form {
     display: none;
 }
