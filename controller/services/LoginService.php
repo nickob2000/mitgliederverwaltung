@@ -21,8 +21,10 @@ class LoginService
     function checkUserCredentials($email, $password)
     {
         $user =  $this->userDao->selectOne($email);
-        if ($user->getPassword() === $password){
-            return $user;
+        if ($user != null){
+            if ($user->getPassword() === $password){
+                return $user;
+            }
         }
         return false;
     }

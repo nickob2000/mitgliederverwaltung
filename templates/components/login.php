@@ -1,12 +1,3 @@
-<?php
-ini_set('display_errors', 1);
-error_reporting(~0);
-include "../../util/Classes.php";
-$service = LoginService::getSerivce();
-
-$serviceprofile = $service->checkUserCredentials("nathan.scharnagl@gmail.com", "test");
-echo $serviceprofile->getFirstname();
-?>
 <div class="bg-dark">
   <div class="container">
     <div class="card card-login mx-auto mt-5">

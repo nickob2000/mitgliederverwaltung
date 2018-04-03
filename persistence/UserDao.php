@@ -52,7 +52,7 @@ join permission per on per.id = u.fk_permission";
      * @param $email
      * @return User
      */
-    public function selectOne($email): User
+    public function selectOne($email)
     {
         $sql = "select p.id as id, u.password as password, p.firstname as firstname, p.lastname as lastname, p.email as email, per.name as permission
 from user u
