@@ -12,16 +12,12 @@ class UserDao
     private $username = "root";
     private $password = "";
     private $dbname = "membermanagement";
-    private $conn;
+    private $conn ;
 
     public function __construct()
     {
 
-        $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
-
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
+        $this->conn = Connection::getConnection();
 
     }
 
@@ -78,7 +74,7 @@ where p.email=?";
             $user->setPermission($permission);
             $users[] = $user;
         }
-        if (empty($users)){
+        if (empty($users)) {
             return null;
         }
         return array_values($users)[0];

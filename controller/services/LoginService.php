@@ -27,6 +27,16 @@ class LoginService
         return false;
     }
 
+    function selectAlö()
+    {
+
+        return $this->userDao->selectAll();
+    }
+
+    function userRequest($email, $firstname, $lastname, $password){
+
+    }
+
     public static function getSerivce(): LoginService
     {
         if (LoginService::$loginService == null) {
