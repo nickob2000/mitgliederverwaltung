@@ -31,8 +31,8 @@ if (!$hidenavigation) {
 <?php include_once "components/login.php";
 include_once "../util/Classes.php";
 $service = LoginService::getSerivce();
-$user = $service->checkUserCredentials("nico.kobler@gmx.ch", "test");
-echo $user;
+$user = $service->checkUserCredentials("nathan.scharnagl@gmail.com", "test");
+echo $user->getFirstname();
 
 ?>
 

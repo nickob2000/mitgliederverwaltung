@@ -9,8 +9,8 @@
 class Connection
 {
     private static $servername = "localhost";
-    private static $username = "root";
-    private static $password = "";
+    private static $username = "webuser";
+    private static $password = 'Pa$$w0rd';
     private static $dbname = "membermanagement";
     protected static $conn = null;
     private static $connection;

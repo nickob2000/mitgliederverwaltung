@@ -168,3 +168,5 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-03-27 11:25:29
+create user webuser@localhost IDENTIFIED BY ''Pa$$w0rd'';
+grant all PRIVILEGES ON membermanagement.* to webuser@localhost;
