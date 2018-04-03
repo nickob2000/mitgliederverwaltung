@@ -52,4 +52,36 @@ join permission per on per.id = u.fk_permission";
         return $users;
     }
 
+    /**
+     * @param $email
+     * @return User
+     */
+    public function selectOne($email): User
+    {
+        $sql = "select p.id as id, u.password as password, p.firstname as firstname, p.lastname as lastname, p.email as email, per.name as permission
+from user u
+join person p on u.fk_person=p.id
+join permission per on per.id = u.fk_permission
+where p.email=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->bind_result($id, $password, $firstname, $lastname, $email, $permission);
+        $users = array();
+        while ($stmt->fetch()) {
+            $user = new User();
+            $user->setId($id);
+            $user->setPassword($password);
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setEmail($email);
+            $user->setPermission($permission);
+            $users[] = $user;
+        }
+        if (empty($users)){
+            return null;
+        }
+        return array_values($users)[0];
+    }
+
 }

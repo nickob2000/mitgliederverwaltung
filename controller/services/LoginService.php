@@ -1,5 +1,5 @@
 <?php
-include "../../persistence/UserDao.php";
+
 
 /**
  * Created by PhpStorm.
@@ -10,14 +10,28 @@ include "../../persistence/UserDao.php";
 class LoginService
 {
     private $userDao;
+    private static $loginService;
 
-    function __construct()
+    private function __construct()
     {
+
         $this->userDao = new UserDao();
     }
 
-    function checkUserCredentials($username, $password){
-        return $this->userDao->selectAll();
+    function checkUserCredentials($email, $password)
+    {
+        $user =  $this->userDao->selectOne($email);
+        if ($user->getPassword() === $password){
+            return $user;
+        }
+        return false;
+    }
 
+    public static function getSerivce(): LoginService
+    {
+        if (LoginService::$loginService == null) {
+            LoginService::$loginService = new LoginService();
+        }
+        return LoginService::$loginService;
     }
 }
