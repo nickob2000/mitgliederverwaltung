@@ -1,3 +1,12 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(~0);
+include "../../util/Classes.php";
+$service = LoginService::getSerivce();
+
+$serviceprofile = $service->checkUserCredentials("nathan.scharnagl@gmail.com", "test");
+echo $serviceprofile->getFirstname();
+?>
 <div class="bg-dark">
   <div class="container">
     <div class="card card-login mx-auto mt-5">
@@ -21,8 +30,8 @@
           <a class="btn btn-primary btn-block" href="index.html">Login</a>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+          <a class="d-block small mt-3" href="register.php">Register an Account</a>
+          <a class="d-block small" href="forgot-password.php">Forgot Password?</a>
         </div>
       </div>
     </div>

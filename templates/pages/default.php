@@ -26,7 +26,7 @@ if(!$hidenavigation){?>
     <?php include_once "../navigation/navigation.html" ?>
 <?}?>
 <!-- <?php //$this->showContent()?>-->
-<?php include_once "startform.html" ?>
+<?php include_once "../components/login.php" ?>
 
 <!-- Bootstrap core JavaScript-->
 <script src="../../plugins/vendor/jquery/jquery.min.js"></script>
