@@ -1,0 +1,24 @@
+/*Globals*/
+
+* {
+    font-size: 15px;
+}
+body,html {
+    margin: 0;
+    padding: 0;
+}
+.content-wrapper {
+    margin-left: 0;
+}
+/*Header & Nav*/
+.navbar-brand {
+    font-size: 2.25rem;
+}
+#mainNav {
+    border-radius: 0;
+}
+
+/*Footer*/
+footer.sticky-footer {
+    width: 100%;
+}

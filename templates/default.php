@@ -1,3 +1,8 @@
+<?php
+include_once "../util/Classes.php";
+$contentmanager = new ContentManager();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +12,6 @@
     <title>Member-Management 1.0</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/styles.css">
     <!--[if lt IE 10]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -19,22 +23,55 @@
     <link href="../plugins/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="../plugins/vendor/theme/css/sb-admin.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../styles/styles.css">
+
 </head>
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<?
-$hidenavigation = true;
-if (!$hidenavigation) {
-    ?>
-    <?php include_once "navigation/navigation.html" ?>
-<? } ?>
-<!-- <?php //$this->showContent()?>-->
-<?php include_once "components/login.php";
-include_once "../util/Classes.php";
-$service = LoginService::getSerivce();
+<body class="fixed-nav sticky-footer" id="page-top">
+<?php
+ini_set('display_errors', 1);
+error_reporting(~0);
+$contentmanager->showNavigation();
+$contentmanager->showContent($_GET['page']);
+/*$service = LoginService::getSerivce();
 $user = $service->checkUserCredentials("nathan.scharnagl@gmail.com", "test");
-echo $user->getFirstname();
+echo $user->getFirstname();*/
 
 ?>
+<?php if($contentmanager->isLoggedIn()){?>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php }?>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+</a>
+<!-- /.container-fluid-->
+<!-- /.content-wrapper-->
+<footer class="sticky-footer">
+    <div class="container">
+        <div class="text-center">
+            <small>Copyright © Member Management 2018</small>
+        </div>
+    </div>
+</footer>
 
 <!-- Bootstrap core JavaScript-->
 <script src="../plugins/vendor/jquery/jquery.min.js"></script>

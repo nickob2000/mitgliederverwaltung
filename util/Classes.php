@@ -9,6 +9,7 @@ include_once "../controller/model/Person.php";
 include_once "../controller/model/Member.php";
 include_once "../controller/model/User.php";
 include_once "../controller/model/Request.php";
+include_once "../controller/model/ContentManager.php";
 include_once "../persistence/Connection.php";
 include_once "../persistence/RequestDao.php";
 include_once "../persistence/UserDao.php";
