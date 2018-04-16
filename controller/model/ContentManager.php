@@ -63,6 +63,22 @@ class ContentManager
             "role" => "Reader",
         )
     );
+    public $userrequests = array(
+        1 => array(
+            "id" => 1,
+            "firstname" => "Nathan",
+            "lastname" => "Scharnagl",
+            "email" => "nathan.scharnagl@gmail.com",
+            "role" => "Admin",
+        ),
+        2 => array(
+            "id" => 1,
+            "firstname" => "Sandro",
+            "lastname" => "Werth",
+            "email" => "sandro.werth@gmail.com",
+            "role" => "Reader",
+        )
+    );
     public function showContent($template) {
         switch ($template){
             case 'login':

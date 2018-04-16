@@ -6,7 +6,7 @@
             </div>
             <div class="card-body bg-secondary">
                 <div class="row">
-                    <?php foreach ($this->users as $user) { ?>
+                    <?php foreach ($this->userrequests as $user) { ?>
                         <div class="col-sm-12 col-md-4">
                             <div class="card mb-5 ">
                                 <div class="card-header">
