@@ -29,12 +29,6 @@ class LoginService
         return false;
     }
 
-    function selectAlö()
-    {
-
-        return $this->userDao->selectAll();
-    }
-
     function userRequest($email, $firstname, $lastname, $password){
 
     }

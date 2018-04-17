@@ -1,6 +1,8 @@
 <?php
+session_start();
+
 include_once "../util/Classes.php";
-$contentmanager = new ContentService();
+$contentmanager = ContentService::getSerivce();
 ?>
 
 <!DOCTYPE html>

@@ -7,6 +7,7 @@
 
 class ContentService
 {
+    private static $contentService;
     public $membersattr = array("ID", "Firstname", "Lastname", "E-Mail", "Phone", "Birthdate", "MemberNr");
     public $members = array(
         1 => array(
@@ -79,37 +80,45 @@ class ContentService
             "role" => "Reader",
         )
     );
+
+    private function __construct()
+    {
+    }
+
     public function showContent($template) {
-        switch ($template){
-            case 'login':
-                if(!$this->isLoggedIn()) {
-                    include_once "components/login.php";
-                }else {
-                    $this->showContent("memberlist");
-                }
+        if ($this->isLoggedIn()){
+            switch ($template){
+                case 'register':
+                    include_once "components/register.php";
+                    break;
+                case 'useradministration':
+                    include_once "components/users.php";
+                    break;
+                case 'memberlist':
+                    include "components/members.php";
+                    break;
+                default:
+                    echo "kein template gefunden";
 
-                break;
-            case 'register':
-                include_once "components/register.php";
-
-                break;
-            case 'useradministration':
-                include_once "components/users.php";
-
-                break;
-            case 'memberlist':
-
-                include "components/members.php";
-                break;
-            default:
-                echo "kein template gefunden";
-
+            }
+        }else{
+            include_once "components/login.php";
         }
+
     }
     public function isLoggedIn(){
-        return true;
+        return $_SESSION["loggedIn"];
     }
+
+    public static function getSerivce(): ContentService
+    {
+        if (ContentService::$contentService == null) {
+            ContentService::$contentService = new ContentService();
+        }
+        return ContentService::$contentService;
+    }
+
     public function showNavigation(){
-        include_once "navigation/navigation.html";
+        include_once "navigation/navigation.php";
     }
 }
