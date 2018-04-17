@@ -68,8 +68,8 @@ class ContentService
 
     public function isAdmin(){
         if ($_SESSION["loggedIn"]){
-            $user = $_SESSION["user"];
-            if ($user["*User*permission"]=="admin"){
+            $user = unserialize($_SESSION["user"]);
+            if ($user->getPermission()=="admin"){
                 return true;
             }
             return false;

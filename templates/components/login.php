@@ -22,7 +22,7 @@ if (isset($_POST['loginsubmit'])) {
         $result = $loginservice->checkUserCredentials($email, $password);
         if ($result) {
             $_SESSION["loggedIn"] = true;
-            $_SESSION["user"] = $result;
+            $_SESSION["user"] = serialize($result);
             header("Location: ?page=memberlist");
             die();
         } else {
