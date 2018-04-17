@@ -23,15 +23,15 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        <?php foreach ($this->members as $member){?>
+                        <?php foreach (MemberlistService::getSerivce()->getAllMembers() as $member){?>
                             <tr>
-                                <td><?php echo $member['id'];?></td>
-                                <td><?php echo $member['firstname'];?></td>
-                                <td><?php echo $member['lastname'];?></td>
-                                <td><?php echo $member['email'];?></td>
-                                <td><?php echo $member['phone'];?></td>
-                                <td><?php echo $member['birthdate'];?></td>
-                                <td><?php echo $member['memberNr'];?></td>
+                                <td><?php echo $member->getId();?></td>
+                                <td><?php echo $member->getFirstname();?></td>
+                                <td><?php echo $member->getLastname();?></td>
+                                <td><?php echo $member->getEmail();?></td>
+                                <td><?php echo $member->getPhone();?></td>
+                                <td><?php echo $member->getBirthdate();?></td>
+                                <td><?php echo $member->getMemberNr();?></td>
                             </tr>
                         <?php }?>
                         </tbody>

@@ -110,7 +110,7 @@ CREATE TABLE `request` (
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `accepted` tinyint(1) NOT NULL,
+  `accepted` tinyint(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

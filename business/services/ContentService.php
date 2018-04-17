@@ -9,61 +9,7 @@ class ContentService
 {
     private static $contentService;
     public $membersattr = array("ID", "Firstname", "Lastname", "E-Mail", "Phone", "Birthdate", "MemberNr");
-    public $members = array(
-        1 => array(
-            "id" => 1,
-            "firstname" => "Nathan",
-            "lastname" => "Scharnagl",
-            "email" => "nathan.scharnagl@gmail.com",
-            "phone" => "07878983020",
-            "birthdate" => "22.01.2000",
-            "memberNr" => "107567823146"
-        )
-    );
-    public $users = array(
-        1 => array(
-            "id" => 1,
-            "firstname" => "Nathan",
-            "lastname" => "Scharnagl",
-            "email" => "nathan.scharnagl@gmail.com",
-            "role" => "Admin",
-        ),
-        2 => array(
-            "id" => 1,
-            "firstname" => "Sandro",
-            "lastname" => "Werth",
-            "email" => "sandro.werth@gmail.com",
-            "role" => "Reader",
-        ),
-        3 => array(
-            "id" => 1,
-            "firstname" => "Sandro",
-            "lastname" => "Werth",
-            "email" => "sandro.werth@gmail.com",
-            "role" => "Reader",
-        ),
-        4 => array(
-            "id" => 1,
-            "firstname" => "Nathan",
-            "lastname" => "Scharnagl",
-            "email" => "nathan.scharnagl@gmail.com",
-            "role" => "Admin",
-        ),
-        5 => array(
-            "id" => 1,
-            "firstname" => "Sandro",
-            "lastname" => "Werth",
-            "email" => "sandro.werth@gmail.com",
-            "role" => "Reader",
-        ),
-        6 => array(
-            "id" => 1,
-            "firstname" => "Sandro",
-            "lastname" => "Werth",
-            "email" => "sandro.werth@gmail.com",
-            "role" => "Reader",
-        )
-    );
+
     public $userrequests = array(
         1 => array(
             "id" => 1,
@@ -89,7 +35,10 @@ class ContentService
         if ($this->isLoggedIn()){
             switch ($template){
                 case 'useradministration':
-                    include_once "components/users.php";
+                    if ($this->isAdmin()){
+                        include_once "components/users.php";
+                    }
+                    echo "Nicht berechtigt";
                     break;
                 case 'memberlist':
                     include "components/members.php";
@@ -115,6 +64,17 @@ class ContentService
     }
     public function isLoggedIn(){
         return $_SESSION["loggedIn"];
+    }
+
+    public function isAdmin(){
+        if ($_SESSION["loggedIn"]){
+            $user = $_SESSION["user"];
+            if ($user["*User*permission"]=="admin"){
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
     public static function getSerivce(): ContentService
