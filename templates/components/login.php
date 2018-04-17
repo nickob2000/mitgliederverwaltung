@@ -5,16 +5,16 @@ if (isset($_POST['loginsubmit'])) {
     if (isset($_POST['email']) && !empty(trim($_POST['email'])) && strlen(trim($_POST['email'])) <= 100) {
         $email = htmlspecialchars(trim($_POST['email']));
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $errors[] = "Geben Sie bitte eine korrekte Email-Adresse ein<br />";
+            $errors[] = "Please fill in a valid E-Mail address<br />";
         }
     } else {
-        $errors[] = "Geben Sie bitte eine korrekte Email-Adresse ein.<br />";
+        $errors[] = "Please fill in a valid E-Mail address.<br />";
     }
 
     if (isset($_POST['password'])) {
         $password = htmlspecialchars(trim($_POST['password']));
     } else {
-        $errors[] = "Geben Sie bitte ein Passwort ein.<br />";
+        $errors[] = "Please fill in a password<br />";
     }
 
     if (empty($errors)) {
@@ -26,7 +26,7 @@ if (isset($_POST['loginsubmit'])) {
             header("Location: ?page=memberlist");
             die();
         } else {
-            $errors[] = "No User found";
+            $errors[] = "No user found";
         }
     }
 

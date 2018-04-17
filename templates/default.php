@@ -35,6 +35,7 @@ $contentmanager = ContentService::getSerivce();
 ini_set('display_errors', 1);
 error_reporting(~0);
 $contentmanager->showNavigation();
+
 $contentmanager->showContent($_GET['page']);
 
 if($contentmanager->isLoggedIn()){

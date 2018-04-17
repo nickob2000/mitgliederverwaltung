@@ -1,57 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$_SESSION["loggedIn"] = false;
+if (isset($_POST['registersubmit'])) {
+    $errors = [];
+    if ($_POST['RegisterEmail'] != "") {
+        $email = htmlspecialchars(trim($_POST['RegisterEmail']));
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            $errors[] = "Please fill in a valid E-Mail address<br />";
+        }
+    } else {
+        $errors[] = "Please fill in a valid E-Mail address<br />";
+    }
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
-  <!-- Bootstrap core CSS-->
-  <link href="../../plugins/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="../../plugins/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="../../plugins/vendor/theme/css/sb-admin.css" rel="stylesheet">
-</head>
+    if ($_POST['RegisterPassword'] != "" && $_POST['ConfirmRegisterPassword'] != "") {
+
+        if($_POST['RegisterPassword'] != $_POST['ConfirmRegisterPassword']){
+            $errors = "Password do not match";
+        }else {
+            $password = htmlspecialchars(trim($_POST['RegisterPassword']));
+            $confirmpassword = htmlspecialchars(trim($_POST['RegisterPassword']));
+        }
+    } else {
+        $errors[] = "Please fill in a Password.<br />";
+    }
+
+    if ($_POST['RegisterName'] != "") {
+        $firstname = htmlspecialchars(trim($_POST['RegisterName']));
+    } else {
+        $errors[] = "Please fill in Firstname.<br />";
+    }
+
+    if ($_POST['RegisterName'] != "") {
+        $lastname = htmlspecialchars(trim($_POST['RegisterName']));
+    } else {
+        $errors[] = "Please fill in Lastname.<br />";
+    }
+
+    if (empty($errors)) {
+        echo "truuuuuu";
+        $loginservice = LoginService::getSerivce();
+        if($loginservice->userRequest($email,$firstname,$lastname,$password)){
+            $result = $loginservice->checkUserCredentials($email, $password);
+            if ($result) {
+                $_SESSION["loggedIn"] = true;
+                $_SESSION["user"] = $result;
+                header("Location: ?page=memberlist");
+                die();
+            } else {
+                $errors[] = "No User found";
+            }
+        }
+
+    }
+
+}
+
+
+?>
 
 <body class="bg-dark">
   <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
-        <form>
+        <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?page=register';?>">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="exampleInputName">First name</label>
-                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name" required>
+                <label for="RegisterName">First name</label>
+                <input class="form-control" name="RegisterName" id="RegisterName" type="text"  <?= isset($_POST['RegisterName']) ? "value='".$_POST['RegisterName']."' " : ""?> aria-describedby="nameHelp" placeholder="Enter first name" required >
               </div>
               <div class="col-md-6">
-                <label for="exampleInputLastName">Last name</label>
-                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name" required>
+                <label for="RegisterLastName">Last name</label>
+                <input class="form-control" name="RegisterLastName" id="RegisterLastName" <?= isset($_POST['RegisterLastName']) ? "value='".$_POST['RegisterLastName']."' " : ""?> type="text" aria-describedby="nameHelp" placeholder="Enter last name" required >
               </div>
             </div>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+            <label for="RegisterEmail">Email address</label>
+            <input class="form-control" name="RegisterEmail" id="RegisterEmail" <?= isset($_POST['RegisterEmail']) ? "value='".$_POST['RegisterEmail']."' " : ""?> type="email" aria-describedby="emailHelp" placeholder="Enter email" required >
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="exampleInputPassword1">Password</label>
-                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password" required>
+                <label for="RegisterPassword">Password</label>
+                <input class="form-control" name="RegisterPassword" id="RegisterPassword" type="password" placeholder="Password" required >
               </div>
               <div class="col-md-6">
-                <label for="exampleConfirmPassword">Confirm password</label>
-                <input class="form-control" id="exampleConfirmPassword" type="password" placeholder="Confirm password" required>
+                <label for="ConfirmRegisterPassword">Confirm password</label>
+                <input class="form-control" name="ConfirmRegisterPassword" id="ConfirmRegisterPassword" type="password" placeholder="Confirm password"  required>
               </div>
             </div>
           </div>
             <input type="submit" name="registersubmit" value="Register" class="btn btn-primary btn-block" href="&action=register">
         </form>
+          <?php
+          if (isset($errors) && is_array($errors)) {
+              foreach ($errors as $error) {
+                  ?>
+                  <div class="text-center text-danger">
+                      <?= $error ?>
+                  </div>
+                  <?php
+
+              }
+          }
+          ?>
         <div class="text-center">
           <a class="d-block small mt-3" href="?page=login">Login Page</a>
         </div>
