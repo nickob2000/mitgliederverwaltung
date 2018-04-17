@@ -36,7 +36,6 @@ class LoginService
         $request->setLastname($lastname);
         $request->setFirstname($firstname);
         $request->setPassword($password);
-        $request->setAccepted(null);
         $this->requestDao->add($request);
         return true;
     }

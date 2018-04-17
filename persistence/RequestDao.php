@@ -23,11 +23,10 @@ class RequestDao
         $email = $request->getEmail();
         $password = $request->getPassword();
         $lastname = $request->getLastname();
-        $accepted = $request->getAccepted();
 
-        $sql = "insert into request(firstname, email, password, lastname, accepted) values (?, ?, ?, ?, ?) ";
+        $sql = "insert into request(firstname, email, password, lastname) values (?, ?, ?, ?) ";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("ssssi", $firstname, $email, $password, $lastname, $accepted);
+        $stmt->bind_param("ssss", $firstname, $email, $password, $lastname);
         $stmt->execute();
     }
 
