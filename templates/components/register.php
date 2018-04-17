@@ -14,7 +14,7 @@ if (isset($_POST['registersubmit'])) {
     if ($_POST['RegisterPassword'] != "" && $_POST['ConfirmRegisterPassword'] != "") {
 
         if($_POST['RegisterPassword'] != $_POST['ConfirmRegisterPassword']){
-            $errors = "Password do not match";
+            $errors[] = "Password do not match";
         }else {
             $password = htmlspecialchars(trim($_POST['RegisterPassword']));
             $confirmpassword = htmlspecialchars(trim($_POST['RegisterPassword']));
