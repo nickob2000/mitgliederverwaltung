@@ -39,15 +39,7 @@ if (isset($_POST['registersubmit'])) {
         echo "truuuuuu";
         $loginservice = LoginService::getSerivce();
         if($loginservice->userRequest($email,$firstname,$lastname,$password)){
-            $result = $loginservice->checkUserCredentials($email, $password);
-            if ($result) {
-                $_SESSION["loggedIn"] = true;
-                $_SESSION["user"] = $result;
-                header("Location: ?page=memberlist");
-                die();
-            } else {
-                $errors[] = "No User found";
-            }
+            $success = "Thank you for your Registration.<br> You will be able to login after the Administrator accepted qoure registration";
         }
 
     }
@@ -62,49 +54,53 @@ if (isset($_POST['registersubmit'])) {
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?page=register';?>">
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="RegisterName">First name</label>
-                <input class="form-control" name="RegisterName" id="RegisterName" type="text"  <?= isset($_POST['RegisterName']) ? "value='".$_POST['RegisterName']."' " : ""?> aria-describedby="nameHelp" placeholder="Enter first name" required >
-              </div>
-              <div class="col-md-6">
-                <label for="RegisterLastName">Last name</label>
-                <input class="form-control" name="RegisterLastName" id="RegisterLastName" <?= isset($_POST['RegisterLastName']) ? "value='".$_POST['RegisterLastName']."' " : ""?> type="text" aria-describedby="nameHelp" placeholder="Enter last name" required >
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="RegisterEmail">Email address</label>
-            <input class="form-control" name="RegisterEmail" id="RegisterEmail" <?= isset($_POST['RegisterEmail']) ? "value='".$_POST['RegisterEmail']."' " : ""?> type="email" aria-describedby="emailHelp" placeholder="Enter email" required >
-          </div>
-          <div class="form-group">
-            <div class="form-row">
-              <div class="col-md-6">
-                <label for="RegisterPassword">Password</label>
-                <input class="form-control" name="RegisterPassword" id="RegisterPassword" type="password" placeholder="Password" required >
-              </div>
-              <div class="col-md-6">
-                <label for="ConfirmRegisterPassword">Confirm password</label>
-                <input class="form-control" name="ConfirmRegisterPassword" id="ConfirmRegisterPassword" type="password" placeholder="Confirm password"  required>
-              </div>
-            </div>
-          </div>
-            <input type="submit" name="registersubmit" value="Register" class="btn btn-primary btn-block" href="&action=register">
-        </form>
-          <?php
-          if (isset($errors) && is_array($errors)) {
-              foreach ($errors as $error) {
-                  ?>
-                  <div class="text-center text-danger">
-                      <?= $error ?>
+          <?php if(!isset($success)){?>
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?page=register';?>">
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="RegisterName">First name</label>
+                    <input class="form-control" name="RegisterName" id="RegisterName" type="text"  <?= isset($_POST['RegisterName']) ? "value='".$_POST['RegisterName']."' " : ""?> aria-describedby="nameHelp" placeholder="Enter first name" required >
                   </div>
-                  <?php
+                  <div class="col-md-6">
+                    <label for="RegisterLastName">Last name</label>
+                    <input class="form-control" name="RegisterLastName" id="RegisterLastName" <?= isset($_POST['RegisterLastName']) ? "value='".$_POST['RegisterLastName']."' " : ""?> type="text" aria-describedby="nameHelp" placeholder="Enter last name" required >
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="RegisterEmail">Email address</label>
+                <input class="form-control" name="RegisterEmail" id="RegisterEmail" <?= isset($_POST['RegisterEmail']) ? "value='".$_POST['RegisterEmail']."' " : ""?> type="email" aria-describedby="emailHelp" placeholder="Enter email" required >
+              </div>
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="RegisterPassword">Password</label>
+                    <input class="form-control" name="RegisterPassword" id="RegisterPassword" type="password" placeholder="Password" required >
+                  </div>
+                  <div class="col-md-6">
+                    <label for="ConfirmRegisterPassword">Confirm password</label>
+                    <input class="form-control" name="ConfirmRegisterPassword" id="ConfirmRegisterPassword" type="password" placeholder="Confirm password"  required>
+                  </div>
+                </div>
+              </div>
+                <input type="submit" name="registersubmit" value="Register" class="btn btn-primary btn-block" href="&action=register">
+            </form>
+              <?php
+              if (isset($errors) && is_array($errors)) {
+                  foreach ($errors as $error) {
+                      ?>
+                      <div class="text-center text-danger">
+                          <?= $error ?>
+                      </div>
+                      <?php
 
+                  }
               }
-          }
-          ?>
+              ?>
+          <?php }else {?>
+              <div class="text-center text-success"> <?php echo $success;?></div>
+          <?php }?>
         <div class="text-center">
           <a class="d-block small mt-3" href="?page=login">Login Page</a>
         </div>
