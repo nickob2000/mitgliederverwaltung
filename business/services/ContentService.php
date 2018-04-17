@@ -88,9 +88,6 @@ class ContentService
     public function showContent($template) {
         if ($this->isLoggedIn()){
             switch ($template){
-                case 'register':
-                    include_once "components/register.php";
-                    break;
                 case 'useradministration':
                     include_once "components/users.php";
                     break;
@@ -102,9 +99,19 @@ class ContentService
 
             }
         }else{
-            include_once "components/login.php";
+            if($template != "register"){
+                include_once "components/login.php";
+            }else{
+                include_once "components/register.php";
+
+            }
         }
 
+    }
+    public function logout(){
+        $_SESSION['loggedIn'] = false;
+        unset($_SESSION['user']);
+        header("Location: ?page=login");
     }
     public function isLoggedIn(){
         return $_SESSION["loggedIn"];
