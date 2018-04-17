@@ -39,7 +39,7 @@ if (isset($_POST['loginsubmit'])) {
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-            <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
+            <form method="post" action="<?php echo $_SERVER["PHP_SELF"]."?page=login";?>">
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input class="form-control" id="email" name="email" type="email" aria-describedby="emailHelp"

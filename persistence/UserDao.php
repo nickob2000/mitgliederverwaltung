@@ -8,21 +8,17 @@
  */
 class UserDao
 {
-    private $servername = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $dbname = "membermanagement";
     private $conn ;
-
+    private $permissionDao;
     public function __construct()
     {
 
         $this->conn = Connection::getConnection();
-
+        $this->permissionDao = new PermissionDao();
     }
 
     /**
-     * @return Article[]
+     * @return User[]
      */
 
     public function selectAll(): array
@@ -78,6 +74,27 @@ where p.email=?";
             return null;
         }
         return array_values($users)[0];
+    }
+
+    public function add(User $user){
+        $lastname = $user->getLastname();
+        $password = $user->getPassword();
+        $email = $user->getEmail();
+        $firstname = $user->getFirstname();
+        $permission = $user->getPermission();
+
+        $sql = "insert into person(firstname, lastname, email) values (?, ?, ?) ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("sss", $firstname, $lastname, $email);
+        $stmt->execute();
+
+        $personId = $this->selectOne($email);
+        $permissionId = $this->permissionDao->selectByName($permission);
+
+        $sql = "insert into user(fk_person, password, fk_permission) values (?, ?, ?) ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("isi", $personId, $password, $permissionId);
+        $stmt->execute();
     }
 
 }

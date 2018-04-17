@@ -10,11 +10,12 @@
 class LoginService
 {
     private $userDao;
+    private $requestDao;
     private static $loginService;
 
     private function __construct()
     {
-
+        $this->requestDao = new RequestDao();
         $this->userDao = new UserDao();
     }
 
@@ -30,7 +31,14 @@ class LoginService
     }
 
     function userRequest($email, $firstname, $lastname, $password){
-
+        $request = new Request();
+        $request->setEmail($email);
+        $request->setLastname($lastname);
+        $request->setFirstname($firstname);
+        $request->setPassword($password);
+        $request->setAccepted(null);
+        $this->requestDao->add($request);
+        return true;
     }
 
     public static function getSerivce(): LoginService

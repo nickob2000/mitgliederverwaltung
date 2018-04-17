@@ -13,4 +13,8 @@ include_once "../business/services/ContentService.php";
 include_once "../persistence/Connection.php";
 include_once "../persistence/RequestDao.php";
 include_once "../persistence/UserDao.php";
+include_once "../persistence/MemberDao.php";
+include_once "../persistence/PermissionDao.php";
 include_once "../business/services/LoginService.php";
+include_once "../business/services/MemberlistService.php";
+include_once "../business/services/RequestService.php";
