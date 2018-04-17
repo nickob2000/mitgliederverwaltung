@@ -1,6 +1,6 @@
 <?php
 include_once "../util/Classes.php";
-$contentmanager = new ContentManager();
+$contentmanager = new ContentService();
 ?>
 
 <!DOCTYPE html>

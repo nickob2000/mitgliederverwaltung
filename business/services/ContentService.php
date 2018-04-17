@@ -5,7 +5,7 @@
  */
 
 
-class ContentManager
+class ContentService
 {
     public $membersattr = array("ID", "Firstname", "Lastname", "E-Mail", "Phone", "Birthdate", "MemberNr");
     public $members = array(
