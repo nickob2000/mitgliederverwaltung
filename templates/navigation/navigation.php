@@ -13,10 +13,17 @@
                     <a class="nav-link" href="?page=memberlist">
                         <i class="fa fa-fw fa-table"></i>Member Table</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="?page=useradministration">
-                        <i class="fa fa-fw fa-user"></i>User administration</a>
-                </li>
+                <?php
+                $user = unserialize($_SESSION["user"]);
+                if ($user->getPermission() == "admin") {
+                    ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?page=useradministration">
+                            <i class="fa fa-fw fa-user"></i>User administration</a>
+                    </li>
+                    <?php
+                }
+                ?>
 
 
                 <li class="nav-item">

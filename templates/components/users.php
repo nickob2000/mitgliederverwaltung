@@ -4,10 +4,9 @@
             <div class="card-header">
                 <i class="fa fa-user"></i> User Requests
             </div>
-            <div class="card-body bg-secondary">
+            <div class="card-body">
                 <div class="row">
                     <?php
-                    print_r(RequestService::getSerivce()->getAllRequests());
                     foreach (RequestService::getSerivce()->getAllRequests() as $user) { ?>
                         <div class="col-sm-12 col-md-4">
                             <div class="card mb-5 ">
@@ -38,10 +37,6 @@
                                     <div class="row">
                                         <div class="col-xs-6">E-Mail:</div>
                                         <div class="col-xs-6"><?php echo $user->getEmail(); ?></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-6">Permission:</div>
-                                        <div class="col-xs-6"><?php echo $user->getPermission(); ?></div>
                                     </div>
                                 </div>
                             </div>

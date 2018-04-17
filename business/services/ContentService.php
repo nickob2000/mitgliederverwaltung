@@ -37,8 +37,9 @@ class ContentService
                 case 'useradministration':
                     if ($this->isAdmin()){
                         include_once "components/users.php";
+                    }else{
+                        header("Location: ?page=memberlist");
                     }
-                    echo "Nicht berechtigt";
                     break;
                 case 'memberlist':
                     include "components/members.php";
