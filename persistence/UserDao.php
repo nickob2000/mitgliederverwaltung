@@ -91,7 +91,7 @@ where p.email=?";
         $personId = $this->selectOne($email);
         $permissionId = $this->permissionDao->selectByName($permission);
 
-        $sql = "insert into user(fk_person, password, fk_permission) values (?, ?, ?) ";
+        $sql = "insert into user(fk_person, password, fk_permission) values (, $password, ?) ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("isi", $personId, $password, $permissionId);
         $stmt->execute();

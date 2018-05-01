@@ -1,3 +1,15 @@
+<?php
+if(isset($_POST['declinerequest'])){
+    if($_POST["userid"] != ""){
+        RequestService::getSerivce()->declineRequestById($_POST["userid"]);
+    }
+}
+if(isset($_POST['acceptrequest'])){
+    if($_POST["userid"] != ""){
+        RequestService::getSerivce()->acceptRequestById($_POST["userid"]);
+    }
+}
+?>
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="card mb-3">
@@ -13,14 +25,14 @@
                                 <div class="card-header">
                                     <div class="clearfix">
                                         <span class="float-left"><?php echo  $user->getFirstname() . " " . $user->getLastname(); ?></span>
-                                        <a href="#" class="btn text-right bg-danger text-white a-btn-slide-text float-right">
-                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                            <span><strong>Decline</strong></span>
-                                        </a>
-                                        <a href="#" class="btn text-right bg-success text-white a-btn-slide-text float-right mr-2">
-                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                            <span><strong>Accept</strong></span>
-                                        </a>
+                                        <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>" name="declinerequestform">
+                                            <input type="hidden" name="userid" value="<?php echo $user->getFirstname(); ?>">
+                                            <input type="submit" name="declinerequest" id="declinerequest" value="Decline" class="btn text-right bg-danger text-white a-btn-slide-text float-right"
+                                        </form>
+                                        <form method="post" action="<?php echo $_SERVER["PHP_SELF"];?>" name="acceptrequestform">
+                                            <input type="hidden" name="userid" value="<?php echo $user->getFirstname(); ?>">
+                                            <input type="submit" name="acceptrequest" id="acceptrequest" value="Accept" class="btn text-right bg-success text-white a-btn-slide-text float-right mr-2"
+                                        </form>
 
                                     </div>
 

@@ -36,7 +36,11 @@ ini_set('display_errors', 1);
 error_reporting(~0);
 $contentmanager->showNavigation();
 
-$contentmanager->showContent($_GET['page']);
+if(isset($_GET['page'])) {
+    $contentmanager->showContent($_GET['page']);
+}else {
+    $contentmanager->showContent("");
+}
 
 if($contentmanager->isLoggedIn()){
     include "components/logout.php";

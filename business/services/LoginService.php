@@ -23,8 +23,16 @@ class LoginService
     {
         $user =  $this->userDao->selectOne($email);
         if ($user != null){
-            if ($user->getPassword() === $password){
+            echo "<br><pre>";
+            print_r($user);
+            echo "</pre>";
+            echo $password;
+            if (password_verify($password, $user->getPassword())){
+
+                print_r($user);
                 return $user;
+            }else {
+                return false;
             }
         }
         return false;

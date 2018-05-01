@@ -23,7 +23,7 @@ class RequestService
         return $this->requestDao->selectAll();
     }
 
-    public function acceptRequest($id)
+    public function acceptRequestById($id)
     {
         $this->requestDao->insertFlag($id, 1);
 
@@ -38,10 +38,11 @@ class RequestService
         return true;
     }
 
-    public function declineRequest($id)
+    public function declineRequestById($id)
     {
         $this->requestDao->insertFlag($id, 0);
     }
+
 
     public static function getSerivce(): RequestService
     {

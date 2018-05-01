@@ -16,7 +16,7 @@ if (isset($_POST['registersubmit'])) {
         if($_POST['RegisterPassword'] != $_POST['ConfirmRegisterPassword']){
             $errors[] = "Password do not match";
         }else {
-            $password = htmlspecialchars(trim($_POST['RegisterPassword']));
+            $password = password_hash(htmlspecialchars(trim($_POST['RegisterPassword'])), PASSWORD_DEFAULT);
             $confirmpassword = htmlspecialchars(trim($_POST['RegisterPassword']));
         }
     } else {
@@ -36,10 +36,9 @@ if (isset($_POST['registersubmit'])) {
     }
 
     if (empty($errors)) {
-        echo "truuuuuu";
         $loginservice = LoginService::getSerivce();
         if($loginservice->userRequest($email,$firstname,$lastname,$password)){
-            $success = "Thank you for your Registration.<br> You will be able to login after the Administrator accepted qoure registration";
+            $success = "Thank you for your Registration.<br> You will be able to login after the Administrator accepted your registration";
         }
 
     }
