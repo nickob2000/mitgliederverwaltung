@@ -29,11 +29,11 @@ CREATE TABLE `member` (
   `fk_person` int(11) NOT NULL,
   `phone` varchar(45) DEFAULT NULL,
   `memberNr` varchar(45) NOT NULL,
-  `birthdate` bigint(20) NOT NULL,
+  `birthdate` date NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `fk_person_UNIQUE` (`fk_person`),
   CONSTRAINT `fk_member_person` FOREIGN KEY (`fk_person`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,1,'0763924285','1',974505600);
+INSERT INTO `member` VALUES (1,1,'0763924285','1','2000-11-18');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ CREATE TABLE `person` (
   `lastname` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,9 +110,9 @@ CREATE TABLE `request` (
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  `accepted` tinyint(1),
+  `accepted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,6 +121,7 @@ CREATE TABLE `request` (
 
 LOCK TABLES `request` WRITE;
 /*!40000 ALTER TABLE `request` DISABLE KEYS */;
+INSERT INTO `request` VALUES (1,'nico@kohi.ch','nico','nico','test',NULL),(2,'tomi@gmail.com','tomi','tomi','test',NULL);
 /*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +135,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fk_person` int(11) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `fk_permission` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `fk_person_UNIQUE` (`fk_person`),
@@ -150,7 +151,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,2,'test',1),(2,3,'test',2);
+INSERT INTO `user` VALUES (1,2,'$2y$10$n4vIG2k6.295CMyYUDzoROZgVEI7eO5dO6khcQigWshjYFdsYR9ZK',1),(2,3,'$2y$10$n4vIG2k6.295CMyYUDzoROZgVEI7eO5dO6khcQigWshjYFdsYR9ZK',2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,6 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-27 11:25:29
-create user webuser@localhost IDENTIFIED BY 'Pa$$w0rd';
-grant all PRIVILEGES ON membermanagement.* to webuser@localhost;
+-- Dump completed on 2018-05-07 21:59:34
