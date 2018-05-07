@@ -40,6 +40,7 @@ from request r";
         $requests = array();
         while ($stmt->fetch()) {
             $request = new Request();
+            $request->setId($id);
             $request->setEmail($email);
             $request->setLastname($lastname);
             $request->setFirstname($firstname);

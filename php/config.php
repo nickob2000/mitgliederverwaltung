@@ -10,8 +10,8 @@ ini_set('display_errors', '1');
  */
 $sql_details = array(
 	"type" => "Mysql",   // Database type: "Mysql", "Postgres", "Sqlserver", "Sqlite" or "Oracle"
-	"user" => "root",        // Database user name
-	"pass" => "",        // Database password
+	"user" => "webuser",        // Database user name
+	"pass" => 'Pa$$w0rd',        // Database password
 	"host" => "localhost",        // Database host
 	"port" => "",        // Database connection port (can be left empty for default)
 	"db"   => "membermanagement",        // Database name

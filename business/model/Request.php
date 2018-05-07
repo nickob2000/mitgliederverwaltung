@@ -8,11 +8,29 @@
  */
 class Request
 {
+    private $id;
     private $email;
     private $firstname;
     private $lastname;
     private $password;
     private $accepted;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
 
     /**
      * @return mixed
