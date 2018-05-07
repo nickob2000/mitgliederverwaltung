@@ -10,6 +10,16 @@ class ContentService
     private static $contentService;
     public $membersattr = array("ID", "Firstname", "Lastname", "E-Mail", "Phone", "Birthdate", "MemberNr");
 
+
+
+
+
+
+
+
+
+
+
     public $userrequests = array(
         1 => array(
             "id" => 1,
@@ -35,6 +45,7 @@ class ContentService
         if ($this->isLoggedIn()){
             switch ($template){
                 case 'useradministration':
+
                     if ($this->isAdmin()){
                         include_once "components/users.php";
                     }else{

@@ -7,35 +7,22 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                    <table id="editorTable" class="display table table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <?php foreach ($this->membersattr as $attr){?>
-                                <th><?php echo $attr;?></th>
-                            <?php }?>
+                            <th></th>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>E-Mail</th>
+                            <th>Phone</th>
+                            <th>Birthdate</th>
+                            <th>MemberNr</th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <?php foreach ($this->membersattr as $attr){?>
-                                <th><?php echo $attr;?></th>
-                            <?php }?>
-                        </tr>
-                        </tfoot>
-                        <tbody>
-                        <?php foreach (MemberlistService::getSerivce()->getAllMembers() as $member){?>
-                            <tr>
-                                <td><?php echo $member->getId();?></td>
-                                <td><?php echo $member->getFirstname();?></td>
-                                <td><?php echo $member->getLastname();?></td>
-                                <td><?php echo $member->getEmail();?></td>
-                                <td><?php echo $member->getPhone();?></td>
-                                <td><?php echo $member->getBirthdate();?></td>
-                                <td><?php echo $member->getMemberNr();?></td>
-                            </tr>
-                        <?php }?>
-                        </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

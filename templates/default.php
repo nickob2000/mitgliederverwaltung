@@ -28,6 +28,26 @@ $contentmanager = ContentService::getSerivce();
 
     <link rel="stylesheet" href="../styles/styles.css">
 
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../styles/editor.dataTables.min.css">
+
+    <style type="text/css" class="init">
+
+    </style>
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+    <script type="text/javascript" language="javascript" src="../scripts/dataTables.editor.min.js"></script>
+
+
+
 </head>
 <body class="fixed-nav sticky-footer" id="page-top">
 
@@ -36,13 +56,13 @@ ini_set('display_errors', 1);
 error_reporting(~0);
 $contentmanager->showNavigation();
 
-if(isset($_GET['page'])) {
+if (isset($_GET['page'])) {
     $contentmanager->showContent($_GET['page']);
-}else {
+} else {
     $contentmanager->showContent("");
 }
 
-if($contentmanager->isLoggedIn()){
+if ($contentmanager->isLoggedIn()) {
     include "components/logout.php";
 }
 ?>
@@ -62,13 +82,12 @@ if($contentmanager->isLoggedIn()){
 </footer>
 
 <!-- Bootstrap core JavaScript-->
-<script src="../plugins/vendor/jquery/jquery.min.js"></script>
+
 <script src="../plugins/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Core plugin JavaScript-->
 <script src="../plugins/vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Page level plugin JavaScript-->
 <script src="../plugins/vendor/chart.js/Chart.min.js"></script>
-<script src="../plugins/vendor/datatables/jquery.dataTables.js"></script>
 <script src="../plugins/vendor/datatables/dataTables.bootstrap4.js"></script>
 <!-- Custom scripts for all pages-->
 <script src="../plugins/vendor/theme/js/sb-admin.min.js"></script>
@@ -77,6 +96,76 @@ if($contentmanager->isLoggedIn()){
 <script src="../plugins/vendor/theme/js/sb-admin-charts.min.js"></script>
 
 <script src="../scripts/main.js"></script>
+
+<script type="text/javascript" language="javascript" class="init">
+
+
+    var editor; // use a global for the submit and return data rendering in the examples
+
+    $(document).ready(function () {
+        editor = new $.fn.dataTable.Editor({
+            ajax: "../plugins/members.php",
+            table: "#editorTable",
+            fields: [{
+                label: "Firstname:",
+                name: "person.firstname"
+            }, {
+                label: "Lastname",
+                name: "person.lastname"
+            }, {
+                label: "E-Mail",
+                name: "person.email"
+            }, {
+                label: "Phone",
+                name: "member.phone"
+            }, {
+                label: "Birthdate",
+                name: "member.birthdate",
+                type: "datetime"
+            }, {
+                label: "MemberNr",
+                name: "member.memberNr"
+            }
+            ]
+        });
+
+        // Activate an inline edit on click of a table cell
+        $('#editorTable').on('click', 'tbody td:not(:first-child)', function (e) {
+            editor.inline(this);
+        });
+
+        $('#editorTable').DataTable({
+            dom: "Bfrtip",
+            ajax: "../plugins/members.php",
+            order: [[1, 'asc']],
+            columns: [
+                {
+                    data: null,
+                    defaultContent: '',
+                    className: 'select-checkbox',
+                    orderable: false
+                },
+                {data: "person.firstname"},
+                {data: "person.lastname"},
+                {data: "person.email"},
+                {data: "member.phone"},
+                {data: "member.birthdate"},
+                {data: "member.memberNr"}
+            ],
+            select: {
+                style: 'os',
+                selector: 'td:first-child'
+            },
+            buttons: [
+                {extend: "create", editor: editor},
+                {extend: "edit", editor: editor},
+                {extend: "remove", editor: editor}
+            ]
+        });
+    });
+
+
+</script>
 
 </body>
 </html>

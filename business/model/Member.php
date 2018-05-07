@@ -6,7 +6,7 @@
  * Date: 27.03.2018
  * Time: 10:19
  */
-class Member extends Person
+class Member extends Person implements \JsonSerializable
 {
     private $phone;
     private $memberNr;
@@ -60,6 +60,10 @@ class Member extends Person
         $this->birthdate = $birthdate;
     }
 
+    function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
 
-
+        return $vars;
+    }
 }

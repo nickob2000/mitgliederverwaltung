@@ -34,7 +34,7 @@ join person p on m.fk_person=p.id";
             $member->setId($id);
             $member->setMemberNr($memberNr);
             $member->setPhone($phone);
-            $member->setBirthdate(date("d.m.Y", $birthdate));
+            $member->setBirthdate(date("Y-m-d", $birthdate));
             $members[] = $member;
         }
         return $members;
