@@ -8,8 +8,9 @@
  */
 class UserDao
 {
-    private $conn ;
+    private $conn;
     private $permissionDao;
+
     public function __construct()
     {
 
@@ -70,13 +71,38 @@ where p.email=?";
             $user->setPermission($permission);
             $users[] = $user;
         }
-        if (empty($users)) {
+        if (empty($users)){
             return null;
         }
-        return array_values($users)[0];
+        return $users[0];
     }
 
-    public function add(User $user){
+    public function selectPersonId($email): int
+    {
+        $sql = "select p.id as id, p.firstname as firstname, p.lastname as lastname, p.email as email
+from person p
+where p.email=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt->bind_result($id, $firstname, $lastname, $email);
+        $users = array();
+        while ($stmt->fetch()) {
+            $user = new User();
+            $user->setId($id);
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setEmail($email);
+            $users[] = $user;
+        }
+        if (empty($users)){
+            return null;
+        }
+        return $users[0]->getId();
+    }
+
+    public function add(User $user)
+    {
         $lastname = $user->getLastname();
         $password = $user->getPassword();
         $email = $user->getEmail();
@@ -88,10 +114,10 @@ where p.email=?";
         $stmt->bind_param("sss", $firstname, $lastname, $email);
         $stmt->execute();
 
-        $personId = $this->selectOne($email);
+        $personId = $this->selectPersonId($email);
         $permissionId = $this->permissionDao->selectByName($permission);
 
-        $sql = "insert into user(fk_person, password, fk_permission) values (, $password, ?) ";
+        $sql = "insert into user(fk_person, password, fk_permission) values (?, ?, ?) ";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("isi", $personId, $password, $permissionId);
         $stmt->execute();

@@ -33,7 +33,8 @@ class RequestDao
     public function selectAll(): array
     {
         $sql = "select r.email as email, r.id as id, r.firstname as firstname, r.lastname as lastname, r.password as password, r.accepted as accepted
-from request r";
+from request r
+where r.accepted is NULL";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $stmt->bind_result($email, $id, $firstname, $lastname, $password, $accepted);
@@ -64,6 +65,7 @@ where r.id = ?";
         $requests = array();
         while ($stmt->fetch()) {
             $request = new Request();
+            $request->setId($id);
             $request->setEmail($email);
             $request->setLastname($lastname);
             $request->setFirstname($firstname);
