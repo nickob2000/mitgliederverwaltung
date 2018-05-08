@@ -33,7 +33,7 @@ CREATE TABLE `member` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `fk_person_UNIQUE` (`fk_person`),
   CONSTRAINT `fk_member_person` FOREIGN KEY (`fk_person`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,1,'0763924285','1','2000-11-18');
+INSERT INTO `member` VALUES (1,1,'0763924285','1','2000-11-18'),(4,8,'000000000','9','2018-03-08');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +84,7 @@ CREATE TABLE `person` (
   `lastname` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (1,'nico','kobler','nico.kobler@gmx.ch'),(2,'nathan','scharnagl','nathan.scharnagl@gmail.com'),(3,'sandro','werth','werthsandro@gmail.com'),(4,'nils','grob','nils.grob@gmail.com'),(5,'colin','heinzer','colin.heinzer@gmail.com');
+INSERT INTO `person` VALUES (1,'thomas','kobler','nico.kobler@gmx.ch'),(2,'nathan','scharnagl','nathan.scharnagl@gmail.com'),(3,'sandro','werth','werthsandro@gmail.com'),(4,'nils','grob','nils.grob@gmail.com'),(5,'colin','heinzer','colin.heinzer@gmail.com'),(7,'test','test','test@gmail.com'),(8,'test','test','test@gmail.com');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,10 +109,10 @@ CREATE TABLE `request` (
   `email` varchar(45) NOT NULL,
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `accepted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `request` (
 
 LOCK TABLES `request` WRITE;
 /*!40000 ALTER TABLE `request` DISABLE KEYS */;
-INSERT INTO `request` VALUES (1,'nico@kohi.ch','nico','nico','test',NULL),(2,'tomi@gmail.com','tomi','tomi','test',NULL);
+INSERT INTO `request` VALUES (1,'nico@kohi.ch','nico','nico','$2y$10$n4vIG2k6.295CMyYUDzoROZgVEI7eO5dO6khcQigWshjYFdsYR9ZK',NULL),(2,'tomi@gmail.com','tomi','tomi','$2y$10$n4vIG2k6.295CMyYUDzoROZgVEI7eO5dO6khcQigWshjYFdsYR9ZK',NULL),(3,'test@gmail.com','test','test','$2y$10$8y0uYCJq4mfj4BrP4ntglOPikYY4whCCEv7YbO4UKfE6wqooo8hQi',1);
 /*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +142,7 @@ CREATE TABLE `user` (
   KEY `fk_user_permission_idx` (`fk_permission`),
   CONSTRAINT `fk_user_permission` FOREIGN KEY (`fk_permission`) REFERENCES `permission` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_person` FOREIGN KEY (`fk_person`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +151,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,2,'$2y$10$n4vIG2k6.295CMyYUDzoROZgVEI7eO5dO6khcQigWshjYFdsYR9ZK',1),(2,3,'$2y$10$n4vIG2k6.295CMyYUDzoROZgVEI7eO5dO6khcQigWshjYFdsYR9ZK',2);
+INSERT INTO `user` VALUES (1,2,'$2y$10$n4vIG2k6.295CMyYUDzoROZgVEI7eO5dO6khcQigWshjYFdsYR9ZK',1),(2,3,'$2y$10$n4vIG2k6.295CMyYUDzoROZgVEI7eO5dO6khcQigWshjYFdsYR9ZK',2),(3,7,'$2y$10$8y0uYCJq4mfj4BrP4ntglOPikYY4whCCEv7YbO4UKfE6wqooo8hQi',2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,4 +168,7 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-07 21:59:34
+-- Dump completed on 2018-05-08  9:49:49
+
+create user webuser@localhost IDENTIFIED BY 'Pa$$w0rd';
+grant all PRIVILEGES ON membermanagement.* to webuser@localhost;

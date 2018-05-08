@@ -41,6 +41,9 @@ class ContentService
     {
     }
 
+    /*
+     * Überprüft die ganzen Routings mit Permissions
+     */
     public function showContent($template) {
         if ($this->isLoggedIn()){
             switch ($template){
@@ -76,7 +79,9 @@ class ContentService
     }
 
 
-
+    /*
+     * Checks Session Logged in
+     */
     public function isLoggedIn(){
         if (isset($_SESSION['loggedIn'])){
             return $_SESSION["loggedIn"];
@@ -84,6 +89,9 @@ class ContentService
         return false;
     }
 
+    /*
+     * Überprüft, ob der User ein Admin ist
+     */
     public function isAdmin(){
         if ($_SESSION["loggedIn"]){
             $user = unserialize($_SESSION["user"]);

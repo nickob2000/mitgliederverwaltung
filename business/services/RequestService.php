@@ -23,6 +23,14 @@ class RequestService
         return $this->requestDao->selectAll();
     }
 
+    /*
+     * Hier wird etwas wichtiges gemacht.
+     * Zuerst wird in der Request Tabelle ein Flag gesetzt, dass er bearbeitet wurde.
+     * Dann wird der Request aus der Tabelle geholt.
+     * Es wird ein neuer User mit diesen Daten aus dem Request erstellt.
+     * Dieser User wird dann wieder gespeichert in der User Tabelle
+     */
+
     public function acceptRequestById($id)
     {
         $this->requestDao->insertFlag($id, 1);
