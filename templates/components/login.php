@@ -21,10 +21,7 @@ if (isset($_POST['loginsubmit'])) {
         $loginservice = LoginService::getSerivce();
         $result = $loginservice->checkUserCredentials($email, $password);
         if ($result) {
-            $_SESSION["loggedIn"] = true;
-            $_SESSION["user"] = serialize($result);
-            header("Location: ?page=memberlist");
-            die();
+            $loginservice->login($result);
         } else {
             $errors[] = "No user found";
         }

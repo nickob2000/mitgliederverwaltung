@@ -38,6 +38,13 @@ class LoginService
         return false;
     }
 
+    public function login($result){
+        $_SESSION["loggedIn"] = true;
+        $_SESSION["user"] = serialize($result);
+        header("Location: ?page=memberlist");
+        die();
+    }
+
     function userRequest($email, $firstname, $lastname, $password){
         $request = new Request();
         $request->setEmail($email);

@@ -74,8 +74,14 @@ class ContentService
         unset($_SESSION['user']);
         header("Location: ?page=login");
     }
+
+
+
     public function isLoggedIn(){
-        return $_SESSION["loggedIn"];
+        if (isset($_SESSION['loggedIn'])){
+            return $_SESSION["loggedIn"];
+        }
+        return false;
     }
 
     public function isAdmin(){
