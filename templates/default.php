@@ -1,5 +1,13 @@
+
 <?php
 header("X-Frame-Options: DENY");
+header("X-XSS-Protection: 1; mode=block");
+header('X-Content-Type-Options: nosniff');
+
+ini_set( 'session.cookie_httponly', 1 );
+
+
+
 session_start();
 
 include_once "../util/Classes.php";
@@ -12,6 +20,8 @@ $contentmanager = ContentService::getSerivce();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type" />
+
     <title>Member-Management 1.0</title>
     <link rel="stylesheet" href="../plugins/cdn/bootstrap.min.css">
     <!--[if lt IE 10]>
