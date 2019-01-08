@@ -44,7 +44,7 @@ if (isset($_POST['loginsubmit'])) {
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input class="form-control" id="password" name="password" type="password" placeholder="Password"
+                    <input class="form-control" id="password" name="password" type="password" placeholder="Password"  autocomplete="off"
                            required>
                 </div>
                 <input type="submit" name="loginsubmit" value="Login" class="btn btn-primary btn-block"

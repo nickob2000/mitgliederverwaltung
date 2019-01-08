@@ -75,11 +75,11 @@ if (isset($_POST['registersubmit'])) {
                 <div class="form-row">
                   <div class="col-md-6">
                     <label for="RegisterPassword">Password</label>
-                    <input class="form-control" name="RegisterPassword" id="RegisterPassword" type="password" placeholder="Password" required >
+                    <input class="form-control" name="RegisterPassword" id="RegisterPassword" type="password" placeholder="Password" required  autocomplete="off" >
                   </div>
                   <div class="col-md-6">
                     <label for="ConfirmRegisterPassword">Confirm password</label>
-                    <input class="form-control" name="ConfirmRegisterPassword" id="ConfirmRegisterPassword" type="password" placeholder="Confirm password"  required>
+                    <input class="form-control" name="ConfirmRegisterPassword" id="ConfirmRegisterPassword" type="password" placeholder="Confirm password"  autocomplete="off"  required>
                   </div>
                 </div>
               </div>
