@@ -1,4 +1,5 @@
 <?php
+header("X-Frame-Options: DENY");
 session_start();
 
 include_once "../util/Classes.php";
@@ -12,11 +13,10 @@ $contentmanager = ContentService::getSerivce();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Member-Management 1.0</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../plugins/cdn/bootstrap.min.css">
     <!--[if lt IE 10]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="../plugins/cdn/html5shiv.min.js"></script>
+    <script src="../plugins/cdn/respond.min.js"></script>
     <![endif]-->
 
     <!-- Bootstrap core CSS-->
@@ -30,20 +30,20 @@ $contentmanager = ContentService::getSerivce();
 
 
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
+          href="../plugins/cdn/datatables/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../plugins/cdn/datatables/select.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="../styles/editor.dataTables.min.css">
 
     <style type="text/css" class="init">
 
     </style>
-    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" language="javascript" src="../plugins/cdn/jquery-1.12.4.js"></script>
     <script type="text/javascript" language="javascript"
-            src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+            src="../plugins/cdn/datatables/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript"
-            src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+            src="../plugins/cdn/datatables/dataTables.buttons.min.js"></script>
     <script type="text/javascript" language="javascript"
-            src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+            src="../plugins/cdn/datatables/dataTables.select.min.js"></script>
     <script type="text/javascript" language="javascript" src="../scripts/dataTables.editor.min.js"></script>
 
 
